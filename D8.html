@@ -15,12 +15,24 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
     <!-- EXERCISE 1:
     Specify the title, the charset (UTF-8) and the viewport of the page.
     -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       /* EXERCISE 2:  
        Create a CSS class for the task list with a diverse background
        Create a CSS class for the task list item with a border, a bold text and a bigger font size
        Style every button of the page to be bigger
     */
+
+    li{
+      border: 1px solid black;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .button{
+      font-size: 1.5rem;
+    }
+
     </style>
   </head>
   <body>
@@ -32,18 +44,22 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       then press "Add new task"</span
     ><br /><br />
 
-    <input type="text" id="newTask" />
-    <input type="button" value="Add new Task" onclick="addNewTask()" />
+    <input type="text" id="newTask"/>
+    <input type="button" value="Add new Task" onclick="addNewTask()" class="button"/>
 
     <!-- EXERCISE 3
         Create a button "Remove Last Task" to trigger the method "removeLast"
         -->
+        <button class="button" onclick="removeLast()">Remove Last Taks</button>
 
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
+        <
         -->
-
-    <ul id="myTaskList"></ul>
+        <button class="button" onclick='removeFirst()'>Remove First Task</button>
+    <ul id="myTaskList">
+    </ul>
+    
 
     <hr />
 
@@ -52,11 +68,12 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       type="button"
       value="Change task background"
       onclick="changeTaskBackgroundColor()"
+      class="button"
     />
 
     <hr />
 
-    <input type="button" value="Sort" onclick="bubblesort()" />
+    <input type="button" value="Sort" onclick="bubblesort()" class="button"/>
 
     <script>
       /* EXERCISE 5: 
@@ -66,10 +83,39 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
           - Use the document.createElement to create the new List Item
           - Append the child to the UL
       */
+      const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
 
+      const addNewTask = function (text) {
+        let ul = document.getElementById("myTaskList")
+        const li = document.createElement('li')
+        const input = document.getElementById('newTask').value
+        li.innerText= input
+        const r = randomBetween(0, 255);
+const g = randomBetween(0, 255);
+const b = randomBetween(0, 255);
+const rgb = `rgb(${r},${g},${b})`;
+        li.style.backgroundColor = rgb
+
+
+        ul.appendChild(li)
+        console.log(ul)
+      }
+    
+      const readInput = function(){
+        let input = document.getElementById("newTask").value
+        console.log(input)
+      }
+      const addEventListener = function(){
+        let input = document.getElementById("newTask")
+        input.onkeydown = readInput
+      }
+      addEventListener()
       /* EXERCISE 6: 
           Create a method "removeLast" which removes the last item from the task list
       */
+      const removeLast =() => {
+        document.getElementById('myTaskList').lastChild.remove()
+      }
 
       /* EXERCISE 7: 
           Create a method "removeFirst" which removes the first item from the task list
@@ -95,6 +141,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
           - Break the code into many function for semplicity 
           - Reuse the functions previously created
       */
+      
     </script>
   </body>
 </html>
