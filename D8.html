@@ -56,8 +56,9 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
         Create a button "Remove First Task" to trigger the method "removeFirst"
         <
         -->
-        <button class="button" onclick='removeFirst()'>Remove First Task</button>
+        <button class="button" onclick="removeFirst()">Remove First Task</button>
     <ul id="myTaskList">
+      <li id="myList1">lolo</li>
     </ul>
     
 
@@ -68,7 +69,7 @@ The have a list of tasks and can, at any time, add a new one, delete one or sort
       type="button"
       value="Change task background"
       onclick="changeTaskBackgroundColor()"
-      class="button"
+      class="buttonUniq"
     />
 
     <hr />
@@ -120,15 +121,34 @@ const rgb = `rgb(${r},${g},${b})`;
       /* EXERCISE 7: 
           Create a method "removeFirst" which removes the first item from the task list
       */
+      const removeFirst =() => {
+        document.getElementById('myTaskList').firstChild.remove()
+      }
+
 
       /* EXERCISE 8: 
           Create a method "getTasksAsArray" which returns (and print to the console) an array containing the tasks as string
       */
-
+      const getTasksAsArray = function (){
+        let myLists = document.getElementsByTagName('li')
+        for( let i=0; i<myLists.length; i++){
+          console.log( myLists[i].innerText)
+        }
+        console.log(myLists.length)
+        
+      }
       /* EXERCISE 9:
           Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an 
           onchange event listener ad applies it as background to every list item
       */
+      const changeTaskBackgroundColor = function (){
+        let myLists = document.getElementsByTagName('li')
+        for( let i=0; i<myLists.length; i++){
+          let myColor = document.querySelector("#colorPicker").value
+          console.log(myColor)
+          myLists[i].style.backgroundColor= myColor
+        }
+      }
 
       /* EXTRA */
 
